@@ -24,11 +24,14 @@ __Coffee Break: 15h - 15h30__
 ### (if you're not planning on using your own)
 
 ```
+## SUGGESTION: general init_data_raw
 init_data_raw <- function(name = "devstuffs"){
   stop_if_not(name, is.character, "Please use a character vector")
   use_data_raw()
-  file.create(glue("data-raw/{name}.R"))
-  file.edit("data-raw/devstuffs.R")
+  
+  new_file_path <- glue(paste0(here::here(), "/data-raw/{name}.R"))
+  file.create(new_file_path)
+  file.edit(new_file_path)
 }
 
 init_docs <- function(name = "Colin FAY"){
