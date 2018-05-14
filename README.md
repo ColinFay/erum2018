@@ -24,12 +24,11 @@ __Coffee Break: 15h - 15h30__
 ### (if you're not planning on using your own)
 
 ```
-## SUGGESTION: general init_data_raw
 init_data_raw <- function(name = "devstuffs"){
   stop_if_not(name, is.character, "Please use a character vector")
   use_data_raw()
   
-  new_file_path <- glue(paste0(here::here(), "/data-raw/{name}.R"))
+  new_file_path <- glue({here()}, "/data-raw/{name}.R")
   file.create(new_file_path)
   file.edit(new_file_path)
 }
@@ -57,7 +56,6 @@ fill_desc <- function(name, Title, Description, repo){
 }
 
 
-## SUGGESTION: add fill_desc_generic
 fill_desc_generic <- function(name, Title, Description = "Here", repo,
                               first_name = "Colin",
                               last_name = "Fay",
