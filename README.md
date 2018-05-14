@@ -24,11 +24,14 @@ __Coffee Break: 15h - 15h30__
 ### (if you're not planning on using your own)
 
 ```
+## SUGGESTION: general init_data_raw
 init_data_raw <- function(name = "devstuffs"){
   stop_if_not(name, is.character, "Please use a character vector")
   use_data_raw()
-  file.create(glue("data-raw/{name}.R"))
-  file.edit("data-raw/devstuffs.R")
+  
+  new_file_path <- glue(paste0(here::here(), "/data-raw/{name}.R"))
+  file.create(new_file_path)
+  file.edit(new_file_path)
 }
 
 init_docs <- function(name = "Colin FAY"){
@@ -50,6 +53,29 @@ fill_desc <- function(name, Title, Description, repo){
   my_desc$set(Description = Description)
   my_desc$set("URL", glue("https://github.com/ColinFay/{repo}"))
   my_desc$set("BugReports", glue("https://github.com/ColinFay/{repo}/issues"))
+  my_desc$write(file = "DESCRIPTION")
+}
+
+
+## SUGGESTION: add fill_desc_generic
+fill_desc_generic <- function(name, Title, Description = "Here", repo,
+                              first_name = "Colin",
+                              last_name = "Fay",
+                              github_user = "ColinFay",
+                              email = "contact@colinfay.me",
+                              role = "c('cre', 'aut')",
+                              version = "0.0.0.9000"){
+  unlink("DESCRIPTION")
+  my_desc <- description$new("!new")
+  my_desc$set("Package", name)
+  my_desc$set("Authors@R",
+              glue("person('{first_name}', '{last_name}', email = '{email}', role = {role}"))
+  my_desc$del("Maintainer")
+  my_desc$set_version(version)
+  my_desc$set(Title = Title)
+  my_desc$set(Description = Description)
+  my_desc$set("URL", glue("https://github.com/{github_user}/{repo}"))
+  my_desc$set("BugReports", glue("https://github.com/{github_user}/{repo}/issues"))
   my_desc$write(file = "DESCRIPTION")
 }
 ```
