@@ -23,7 +23,7 @@ __Coffee Break: 15h - 15h30__
 
 ### (if you're not planning on using your own)
 
-```
+```r
 init_data_raw <- function(name = "devstuffs"){
   stop_if_not(name, is.character, "Please use a character vector")
   use_data_raw()
