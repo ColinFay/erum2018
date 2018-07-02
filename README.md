@@ -43,7 +43,7 @@ init_docs <- function(name = "Colin FAY"){
 
 fill_desc <- function(name, Title, Description, repo){
   unlink("DESCRIPTION")
-  my_desc <- description$new("!new")
+  my_desc <- desc::description$new("!new")
   my_desc$set("Package", name)
   my_desc$set("Authors@R", "person('Colin', 'Fay', email = 'contact@colinfay.me', role = c('cre', 'aut'))")
   my_desc$del("Maintainer")
@@ -64,7 +64,7 @@ fill_desc_generic <- function(name, Title, Description = "Here", repo,
                               role = "c('cre', 'aut')",
                               version = "0.0.0.9000"){
   unlink("DESCRIPTION")
-  my_desc <- description$new("!new")
+  my_desc <- desc::description$new("!new")
   my_desc$set("Package", name)
   my_desc$set("Authors@R",
               glue("person('{first_name}', '{last_name}', email = '{email}', role = {role}"))
